@@ -285,6 +285,12 @@ reverse: The "functional method" allows easily adding new functions,
 whereas the "object-oriented method" requires modifying an interface
 or class.
 
+The designers of functional languages and those who imported
+record/data classes and pattern matching into object-oriented
+languages felt that the tradeoffs of the "functional method" are worth
+considering.  This is particularly the case with *combinator models*,
+a subject for another post.
+
 ### Typescript
 
 ### Kotlin
@@ -299,12 +305,9 @@ or class.
 
 TODO:
 
-* Related work, other approaches
+* Related work, other approaches, design recipes
 * Discussion of advantages/disadvantages
-* write function
-* esign recipes
 * explain why these words
-* explain degenerate models with "null", SQL, JSON
 * explain recent phenomenon
 * explain coupling
-* combinator models / extensibility
+
