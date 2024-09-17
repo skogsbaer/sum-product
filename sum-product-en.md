@@ -285,11 +285,13 @@ reverse: The "functional method" allows easily adding new functions,
 whereas the "object-oriented method" requires modifying an interface
 or class.
 
-The designers of functional languages and those who imported
+The designers of functional languages and those who recently imported
 record/data classes and pattern matching into object-oriented
 languages felt that the tradeoffs of the "functional method" are worth
 considering.  This is particularly the case with *combinator models*,
 a subject for another post.
+
+## Sums and Products in Various Languages
 
 ### Typescript
 
@@ -303,11 +305,23 @@ a subject for another post.
 
 ## Discussion
 
+Sums and products are the bricks and mortar of data models.
+Architects can use them to realize their potential for ergonomic,
+powerful software, long-lived architecture and maintainable code.
+Given the importance of these basic concepts, it is unfortunate that
+there are no universally established terms for sums and products in
+the programming and architecture community.
+
+For an extensive introduction to systematic data modeling with sums
+and products (using *design recipes*), check out Felleisen et al's
+classic [How to Design Programs](https://htdp.org/) and the
+German-language [Schreibe Dein
+Programm!](https://www.deinprogramm.de/sdp/), both freely available
+online.
+
 TODO:
 
-* Related work, other approaches, design recipes
 * Discussion of advantages/disadvantages
 * explain why these words
-* explain recent phenomenon
-* explain coupling
+
 
