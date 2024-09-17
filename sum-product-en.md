@@ -222,6 +222,69 @@ and use an anti-corruption layer between them as necessary.
 
 ## Sums and Products and the Open/Closed Principle
 
+Consider writing functions or methods that operate on a sum of
+products, such as one that just formats the dosage for human readers.
+These functions usually have to branch on the specific case of dosage.
+In Java, there are fundamentally two ways of doing this branching.
+Classic Java uses polymorphic method dispatch, like so:
+
+```java
+public sealed interface Dosage {
+    String format();
+
+    record Tablet(int morning, int midday, int evening)
+            implements Dosage {
+        @Override
+        public String format() {
+            return morning + "-" + midday + "-" + evening;
+        }
+
+    }
+    record Infusion(double speed, int duration)
+            implements Dosage {
+        @Override
+        public String format() {
+            return speed + "ml/min for " + duration;
+        }
+
+    }
+}	
+```
+
+However, modern Java also offers *pattern matching* to do this,
+imported from functional languages with algebraic data types:
+
+```java
+public sealed interface Dosage {
+    default String format() {
+        return switch (this) {
+            case Tablet(int morning, int midday, int evening) ->
+                    morning + "-" + midday + "-" + evening;
+            case Infusion(double speed, int duration) ->
+                    speed + "ml/min for " + duration;
+        };
+    }
+}
+```
+
+This way of writing the method has the advantage that everything in
+one place, and easy to reason about its behavior.  The
+"object-oriented method" has the advantage that the sum is more easily
+*extensible*: To add another kind of dosage, one merely has to add a
+new class implementing *Dosage* and implement the `format` method
+without touching the existing code.  This serves the familar [Open/Closed
+Principle](https://public.isaqb.org/glossary/glossary-en.html#term-open-close-principle),
+which states that software - in the face of new requirements - should
+ideally only require extension, not modification.
+
+Clearly, the "object-oriented method" allows easy extension by new
+cases, whereas the "functional method" requires modification in that
+case.  New cases are not the only way by which software grows,
+however: What about new functions or methods?  Here, the tradeoffs
+reverse: The "functional method" allows easily adding new functions,
+whereas the "object-oriented method" requires modifying an interface
+or class.
+
 ### Typescript
 
 ### Kotlin
@@ -244,4 +307,4 @@ TODO:
 * explain degenerate models with "null", SQL, JSON
 * explain recent phenomenon
 * explain coupling
-
+* combinator models / extensibility
