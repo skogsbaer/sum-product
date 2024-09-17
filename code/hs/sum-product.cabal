@@ -1,0 +1,38 @@
+cabal-version: 2.2
+
+-- This file has been generated from package.yaml by hpack version 0.37.0.
+--
+-- see: https://github.com/sol/hpack
+
+name:           sum-product
+version:        0.1.0.0
+synopsis:       Demo project for data modelling with sum and
+description:    Demo project for data modelling with sum and
+homepage:       https://github.com/skogsbaer/sum-product#readme
+bug-reports:    https://github.com/skogsbaer/sum-product/issues
+author:         Stefan Wehr
+maintainer:     wehr@hs-offenburg.de
+copyright:      2024 Stefan Wehr
+license:        BSD-3-Clause
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    CHANGELOG.md
+
+source-repository head
+  type: git
+  location: https://github.com/skogsbaer/sum-product
+
+executable sum-product-exe
+  main-is: Main.hs
+  other-modules:
+      Paths_sum_product
+  autogen-modules:
+      Paths_sum_product
+  hs-source-dirs:
+      src
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+  build-depends:
+      base >=4.7 && <5
+  default-language: Haskell2010

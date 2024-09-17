@@ -1,0 +1,32 @@
+name:                sum-product
+version:             0.1.0.0
+github:              "skogsbaer/sum-product"
+license:             BSD-3-Clause
+author:              "Stefan Wehr"
+maintainer:          "wehr@hs-offenburg.de"
+copyright:           "2024 Stefan Wehr"
+
+extra-source-files:
+  - README.md
+  - CHANGELOG.md
+
+synopsis:            Demo project for data modelling with sum and
+description:            Demo project for data modelling with sum and
+
+dependencies:
+  - base >= 4.7 && < 5
+
+ghc-options:
+  - -Wall
+  - -Wcompat
+  - -Widentities
+  - -Wincomplete-record-updates
+  - -Wincomplete-uni-patterns
+  - -Wmissing-home-modules
+  - -Wpartial-fields
+  - -Wredundant-constraints
+
+executables:
+  sum-product-exe:
+    main:                Main.hs
+    source-dirs:         src
