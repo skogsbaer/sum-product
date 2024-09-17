@@ -190,7 +190,7 @@ non-null integers denoting its attributes.  Presumably, `speed` and
 `duration` *would* be null.  Conversely for the other case.
 
 This is an *encoding* of a sum as a product, with the help of nullable
-types, and quite indirect at that.  (In way, nullable types are a
+types, and quite indirect at that.  (In a way, nullable types are a
 degenerate sum of some data type and null.)  As it is arbitrary, it
 poses significant risks of being misused: What if `dosageKind` is 1,
 but `morning` is null, and `speed` is 5?  Everyone who has been around
@@ -217,7 +217,8 @@ would typically use explicit tags to encode sums:
 ```
 
 This, too emphasizes the need to separate between the *data model* in
-the software and *encodings* in a database or serialization format.
+the software and *encodings* in a database or serialization format,
+and use an anti-corruption layer between them as necessary.
 
 ## Sums and Products and the Open/Closed Principle
 
