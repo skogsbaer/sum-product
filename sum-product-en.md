@@ -303,6 +303,12 @@ a subject for another post.
 
 ### Racket/Teaching Languages
 
+### Clojure
+
+### Scala
+
+## Some Notes on Terminology
+
 ## Discussion
 
 Sums and products are the bricks and mortar of data models.
@@ -321,6 +327,7 @@ online.
 
 TODO:
 
+* link to FUNAR/DSL
 * Discussion of advantages/disadvantages
 * explain why these words
 
