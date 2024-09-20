@@ -397,9 +397,11 @@ German book [Schreibe Dein
 Programm!](https://www.deinprogramm.de/sdp/), both freely available
 online.
 
+Sums and products are also covered in the iSAQB Advanced curriculi on
+[Functional Architecture (FUNAR)](https://www.isaqb.org/certifications/cpsa-certifications/cpsa-advanced-level/funar-functional-software-architecture/) and [Domain-Specific Languages (DSL)](https://www.isaqb.org/certifications/cpsa-certifications/cpsa-advanced-level/dsl/).
+
 TODO:
 
-* link to FUNAR/DSL
 * Discussion of advantages/disadvantages
 
 
