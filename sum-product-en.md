@@ -340,7 +340,47 @@ def formatDosage(d: Dosage) -> str:
 
 ### Scala
 
-## Some Notes on Terminology
+## Terminology
+
+Why are these constructs called sums and products?  One simple
+argument is about the number of values a sum or product type has.
+Consider the following Java enumerations:
+
+```java
+enum T2 {
+    A, B
+}
+enum T3 {
+    X, Y, Z
+}
+```
+
+`T2` has two values and `T3` has three. Here's a product of these two
+types:
+
+```java
+record P(T2 t2, T3 t3) {}
+```
+
+This type has six values - the product of 2 and 3.  Now consider a
+sum:
+
+```java
+sealed interface S{}
+record RT2(T2 t2) implements S {}
+record RT3(T3 t3) implements S {}
+```
+
+This has 2+3=5 values.
+
+Another way to look at these two constructs would be from a
+set-theoretic perspective: products are basically [cartesian
+products](https://en.wikipedia.org/wiki/Cartesian_product) containing
+*tuples* (offered directly by many functional languages) and sums are
+set *unions*.  As the programming-language constructs for sums in
+Haskell or Java ensure that the particiants in a sum are
+distinguishable from each other, they are also called *disjoint* or
+*discriminated unions*.
 
 ## Discussion
 
@@ -361,6 +401,5 @@ TODO:
 
 * link to FUNAR/DSL
 * Discussion of advantages/disadvantages
-* explain why these words
 
 
