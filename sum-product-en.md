@@ -330,15 +330,78 @@ def formatDosage(d: Dosage) -> str:
 
 ### Kotlin
 
+```kotlin
+sealed interface Dosage {
+    fun format(): String =
+        when(this) {
+            is Tablet ->
+                "$morning-$midday-$evening"
+            is Infusion ->
+                speed.toString() + "ml/min for " + duration + "h"
+        }
+    data class Tablet(val morning: Int, val midday: Int, val evening: Int)
+	  : Dosage {}
+
+    data class Infusion(val speed: Double, val duration: Int)
+	  : Dosage {}
+}
+```
+
 ### C#
 
 ### Rust
 
 ### Racket/Teaching Languages
 
+```racket
+#lang deinprogramm/sdp
+(define-record tablet
+  make-tablet
+  (tablet-morning natural)
+  (tablet-midday natural)
+  (tablet-evening natural))
+
+(define-record infusion
+  make-infusion
+  (infusion-speed rational)
+  (infusion-duration natural))
+
+(define dosage
+  (signature (mixed tablet infusion)))
+
+(: format (dosage -> string))
+
+(define format
+  (lambda (dosage)
+    (match dosage
+      ((make-tablet morning midday evening)
+       (string-append (number->string morning) "-"
+                      (number->string midday) "-"
+                      (number->string evening)))
+      ((make-infusion speed duration)
+       (string-append
+        (number->string speed) "ml/min for "
+        (number->string duration) "h")))))
+```
+
 ### Clojure
 
 ### Scala
+
+```scala
+enum Dosage {
+  case Tablet(morning: Int, midday: Int, evening: Int)
+  case Infusion(speed: Double, duration: Int)
+
+  def format =
+    this match {
+      case Tablet(morning, midday, evening) =>
+        morning + midday + evening
+      case Infusion(speed, duration) =>
+        speed + "ml/min for " + duration + "h"
+    }
+}
+```
 
 ## Terminology
 
@@ -403,5 +466,5 @@ Sums and products are also covered in the iSAQB Advanced curriculi on
 TODO:
 
 * Discussion of advantages/disadvantages
-
+* mention expression problem
 
