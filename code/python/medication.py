@@ -1,6 +1,4 @@
-from typing import Union
 from dataclasses import dataclass
-import string
 
 @dataclass
 class TabletDosage:
@@ -13,9 +11,25 @@ class InfusionDosage:
     speed: float
     duration: int
 
-Dosage = TabletDosage | InfusionDosage
+# Requires python 3.12
+type Dosage = TabletDosage | InfusionDosage
 
 @dataclass
 class Medication:
-    drugName: string
+    drugName: str
     dosage: Dosage
+
+def format(m: Medication) -> str:
+    return f'{m.drugName}: {formatDosage(m.dosage)}'
+
+def formatDosage(d: Dosage) -> str:
+    match d:
+        case TabletDosage():
+            return f'{d.morning}-{d.midday}-{d.evening}'
+        case InfusionDosage():
+            return f'{d.speed} ml/min for {d.duration}h'
+
+paracetamol = Medication("Paracetamol", TabletDosage(1,0,2))
+infliximab = Medication("Infliximab", InfusionDosage(1.5, 2))
+print(format(paracetamol))
+print(format(infliximab))

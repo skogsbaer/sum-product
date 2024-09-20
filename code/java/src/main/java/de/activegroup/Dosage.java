@@ -1,14 +1,6 @@
 package de.activegroup;
 
 public sealed interface Dosage {
-    default String format() {
-        return switch (this) {
-            case Tablet(int morning, int midday, int evening) ->
-                    morning + "-" + midday + "-" + evening;
-            case Infusion(double speed, int duration) ->
-                    speed + "ml/min for " + duration;
-        };
-    }
 
     String format2();
     record Tablet(int morning, int midday, int evening)
@@ -23,7 +15,7 @@ public sealed interface Dosage {
             implements Dosage {
         @Override
         public String format2() {
-            return speed + "ml/min for " + duration;
+            return speed + "ml/min for " + duration + "h";
         }
 
     }
