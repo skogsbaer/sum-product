@@ -33,7 +33,8 @@ This article explains the simple concept of sums and products.
 Further, it shows how to encode a simplified
 real-world scenario using sums
 and products in modern programming languages
-(Java, Python, Typescript, Kotlin, C#, Haskell, Rust, and Racket.)
+(Java, Python, Typescript, Kotlin, C#, Haskell, Rust, Racket, Swift,
+and F#.)
 
 
 ## Scenario
