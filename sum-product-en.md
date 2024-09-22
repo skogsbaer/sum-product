@@ -332,43 +332,6 @@ formatting function/method in various languages.  For brevity, we only
 list the functionality for dosages, omitting the surrounding
 medication record.
 
-### Typescript
-
-Typescript's type system has "undiscrimated unions" via the `|`
-operator.  It's up to the programmer to include a tag in participants
-in a union to discriminate them.
-
-```typescript
-type Medication = {
-    drugName: string
-    dosage: Dosage
-}
-
-type Dosage = {
-    kind: "tablet",
-    morning: number,
-    midday: number,
-    evening: number
-} | {
-    kind: "infusion",
-    speed: number,
-    duration: number
-}
-
-function formatDosage(dosage: Dosage) {
-    let d: string;
-    switch (dosage.kind) {
-        case "tablet":
-            d = m.dosage.morning + "-" + m.dosage.midday + "-" + m.dosage.evening
-            break
-        case "infusion":
-            d = m.dosage.speed + " ml/min for" + m.dosage.duration + "h"
-            break
-    }
-    return m.drugName + ": " + d
-}
-```
-
 ### Kotlin
 
 Kotlin offers sealed interfaces and "data classes" corresponding to
@@ -394,27 +357,6 @@ sealed interface Dosage {
 ### C#
 
 FIXME
-
-### Rust
-
-Rust - being in many way inspired by Haskell - has direct support for
-both algebraic data types and pattern matching.
-
-```rust
-enum Dosage {
-    Tablet { morning: i32, midday: i32, evening: i32 },
-    Infusion { speed: f32, duration: i32 }
-}
-
-fn formatDosage(dosage: Medication) -> String {
-    match dosage {
-        Dosage::Tablet { morning, midday, evening } =>
-            format!("{morning}-{midday}-{evening}"),
-        Dosage::Infusion { speed, duration } =>
-            format!("{speed} ml/min for {duration}h")
-    }
-}
-```
 
 ### Racket/Teaching Languages
 
@@ -494,6 +436,24 @@ enum Dosage {
 }
 ```
 
+### F#
+
+F# is another strongly typed language with algebraic data types and
+pattern matching.
+
+```fsharp
+type Dosage 
+  = Tablet of int * int * int
+  | Infusion of double * double
+
+let formatDosage(dosage: Dosage): string =
+	match dosage with
+	| Tablet (morning, midday, evening) ->
+	  string morning + "-" + string midday + "-" + string evening
+	| Infusion (speed, duration) ->
+	  string speed + "ml/min for " + string duration + "h"
+```
+
 ### Swift
 
 Swift, another language strongly inspired by strongly typed functional
@@ -519,22 +479,57 @@ extension Dosage {
 }
 ```
 
-### F#
+### Rust
 
-F# is another strongly typed language with algebraic data types and
-pattern matching.
+Rust - being in many way inspired by Haskell - has direct support for
+both algebraic data types and pattern matching.
 
-```fsharp
-type Dosage 
-  = Tablet of int * int * int
-  | Infusion of double * double
+```rust
+enum Dosage {
+    Tablet { morning: i32, midday: i32, evening: i32 },
+    Infusion { speed: f32, duration: i32 }
+}
 
-let formatDosage(dosage: Dosage): string =
-	match dosage with
-	| Tablet (morning, midday, evening) ->
-	  string morning + "-" + string midday + "-" + string evening
-	| Infusion (speed, duration) ->
-	  string speed + "ml/min for " + string duration + "h"
+fn formatDosage(dosage: Medication) -> String {
+    match dosage {
+        Dosage::Tablet { morning, midday, evening } =>
+            format!("{morning}-{midday}-{evening}"),
+        Dosage::Infusion { speed, duration } =>
+            format!("{speed} ml/min for {duration}h")
+    }
+}
+```
+
+### Typescript
+
+Typescript's type system has "undiscrimated unions" via the `|`
+operator.  It's up to the programmer to include a tag in participants
+in a union to discriminate them.
+
+```typescript
+type Dosage = {
+    kind: "tablet",
+    morning: number,
+    midday: number,
+    evening: number
+} | {
+    kind: "infusion",
+    speed: number,
+    duration: number
+}
+
+function formatDosage(dosage: Dosage) {
+    let d: string;
+    switch (dosage.kind) {
+        case "tablet":
+            d = m.dosage.morning + "-" + m.dosage.midday + "-" + m.dosage.evening
+            break
+        case "infusion":
+            d = m.dosage.speed + " ml/min for" + m.dosage.duration + "h"
+            break
+    }
+    return m.drugName + ": " + d
+}
 ```
 
 ## Terminology
