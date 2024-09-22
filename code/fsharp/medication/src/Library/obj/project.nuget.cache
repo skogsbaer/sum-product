@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "7Vxvj4A/sUo=",
+  "success": true,
+  "projectFilePath": "/Users/sperber/data/active-group/pr/sum-product/code/fsharp/medication/src/Library/Library.fsproj",
+  "expectedPackageFiles": [
+    "/Users/sperber/.nuget/packages/fsharp.core/8.0.300/fsharp.core.8.0.300.nupkg.sha512"
+  ],
+  "logs": []
+}

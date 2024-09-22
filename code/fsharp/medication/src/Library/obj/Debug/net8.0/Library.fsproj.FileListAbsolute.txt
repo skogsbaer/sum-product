@@ -1,0 +1,5 @@
+/Users/sperber/data/active-group/pr/sum-product/code/fsharp/medication/src/Library/obj/Debug/net8.0/Library.fsproj.AssemblyReference.cache
+/Users/sperber/data/active-group/pr/sum-product/code/fsharp/medication/src/Library/obj/Debug/net8.0/Library.AssemblyInfoInputs.cache
+/Users/sperber/data/active-group/pr/sum-product/code/fsharp/medication/src/Library/obj/Debug/net8.0/Library.AssemblyInfo.fs
+/Users/sperber/data/active-group/pr/sum-product/code/fsharp/medication/src/Library/obj/Debug/net8.0/Library.fsproj.CoreCompileInputs.cache
+/Users/sperber/data/active-group/pr/sum-product/code/fsharp/medication/src/Library/obj/Debug/net8.0/Library.sourcelink.json

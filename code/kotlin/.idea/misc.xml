@@ -1,20 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_10" />
-  <component name="SbtLocalSettings">
-    <option name="projectSyncType">
-      <map>
-        <entry key="$USER_HOME$/build/cats" value="PREVIEW" />
-        <entry key="$USER_HOME$/build/cats-effect" value="PREVIEW" />
-        <entry key="$USER_HOME$/data/active-group/schulung/isaqb/funar/3-Technologien/http4s" value="PREVIEW" />
-        <entry key="$USER_HOME$/data/active-group/schulung/scala" value="PREVIEW" />
-        <entry key="$USER_HOME$/data/active-group/schulung/scala/basic" value="PREVIEW" />
-        <entry key="$USER_HOME$/data/talks/oop-2020/streams-example" value="PREVIEW" />
-        <entry key="$USER_HOME$/soft/equals/equals-web" value="PREVIEW" />
-      </map>
-    </option>
-  </component>
-  <component name="ScalaSbtSettings">
-    <option name="customVMPath" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_18" default="true" project-jdk-name="18" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>
