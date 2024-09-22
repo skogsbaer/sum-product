@@ -196,7 +196,7 @@ non-null integers.  Presumably, `speed` and
 `duration` *should* be null.  Conversely for the other case.
 
 This is an quite indirect *encoding* of a sum as a product, with the help of nullable
-types. This encodingz4
+types. This encoding
 poses significant risks of being misused: What if `dosageKind` is 1,
 but `morning` is null, and `speed` is 5?  Everyone who has been around
 real-world SQL databases has seen rows like that, and the ensuing
@@ -255,7 +255,7 @@ public sealed interface Dosage {
 }
 ```
 
-However, modern Java also offers more *functional way* via pattern matching.
+However, modern Java also offers a more *functional way* via pattern matching.
 (Pattern matching in Java is greatly influence by functional languages with
 algebraic data types,
 see [JEP 394](https://openjdk.org/jeps/394), [JEP 440](https://openjdk.org/jeps/440),
@@ -466,7 +466,7 @@ Swift, another language strongly inspired by strongly typed functional
 languages, offers algebraic data types in the form of "enums" as well
 as pattern matching:
 
-```
+```swift
 enum Dosage {
     case Tablet(Int, Int, Int)
     case Infusion(Double, Int)
