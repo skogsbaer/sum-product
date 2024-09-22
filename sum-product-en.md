@@ -1,6 +1,6 @@
 # Data Modeling, Sums and Products
 
-Date Modeling is often an underappreciated aspect of software architecture,
+Data Modeling is often an underappreciated aspect of software architecture,
 yet it plays a crucial role in achieving not only functional but also
 usability and maintainability goals. Poor
 data models and poorly integrated data models can greatly
@@ -79,12 +79,12 @@ medication and the two different dosages uses "consists of" and the
 word "and", whereas the description of dosage uses "or".  Different
 wordings are possible (e.g. "has attributes" for the former and "is one of
 the following" for the latter), but the wordings always describe the two sorts of
-data that are fundamentally different - on is "and data", the other is "or
+data that are fundamentally different - one is "and data", the other is "or
 data".  As stated above, these two concepts go by different names, but
 the most common ones are *products* (for "and data") and *sums* (for
 "or data").
 
-* A **products** has several, fixed attributes.
+* A **product** has several, fixed attributes.
 * A **sum** has several, distinct alternatives.
 
 ## Products, Sums, and Code
@@ -159,7 +159,7 @@ data Medication = Medication { drugName :: String, dosage :: Dosage }
 `Dosage` is the sum of the products `TableDosage` (with attributes
 `morning`, `midday`, and `evening`) and `InfusionDosage` (with
 attributes `speed` and `duration`).
-`Medication` can be seens as a sum with only one alternative,
+`Medication` can be seen as a sum with only one alternative,
 namely the product `Medication` (with attributes `drugName` and
 `dosage`).
 
@@ -195,8 +195,8 @@ dosage, and we'd expect `morning`, `midday`, and `evening` to be
 non-null integers.  Presumably, `speed` and
 `duration` *should* be null.  Conversely for the other case.
 
-This is an quite indirect *encoding* of a sum as a product, with the help of nullable
-types. This encoding
+This is a quite indirect *encoding* of a sum as a product,
+with the help of nullable types. This encoding
 poses significant risks of being misused: What if `dosageKind` is 1,
 but `morning` is null, and `speed` is 5?  Everyone who has been around
 real-world SQL databases has seen rows like that, and the ensuing
@@ -222,7 +222,7 @@ would typically use explicit tags to encode sums:
 ```
 
 Again, this example emphasizes the need to separate between the *data model* in
-the software and *encodings* in a databases or serialization formats,
+the software and *encodings* in a database or serialization formats,
 and use an anti-corruption layer between them as necessary.
 
 ## Sums and Products and the Open/Closed Principle
@@ -298,7 +298,7 @@ without touching the existing code. But adding new operations is painful
 because it requires a new method in the `Dosage` interface, with changes
 to all classes implementing it.
 
-The familar [Open/Closed Principle](https://public.isaqb.org/glossary/glossary-en.html#term-open-close-principle)
+The familiar [Open/Closed Principle](https://public.isaqb.org/glossary/glossary-en.html#term-open-close-principle)
 states that software - in the face of new requirements - should
 ideally only require extension, not modification.
 Code written in what we called the functional way (or with the visitor pattern)
@@ -336,9 +336,9 @@ def formatDosage(d: Dosage) -> str:
 
 To illustrate programming with sums and products, we've implemented
 representations for medication dosages along with the associated
-formatting function/method in various languages.  For brevity, we only
-list the functionality for dosages, omitting the surrounding
-medication record.
+formatting function/method in various languages.  For brevity, we
+list only the functionality for dosages, omitting the surrounding
+medication record. The [full code](https://github.com/skogsbaer/sum-product/tree/main/code) is available.
 
 ### Kotlin
 
@@ -385,13 +385,6 @@ public record Dosage {
     // private constructor can prevent derived cases from being defined elsewhere
     private Dosage() {}
 }
-
-public record Medication(string drugName, Dosage dosage) {
-
-    public string format() {
-        return this.drugName + ": " + this.dosage.format();
-    }
-}
 ```
 
 The compiler cannot check that
@@ -430,7 +423,6 @@ the `match` covers all possible cases.
   (signature (mixed tablet infusion)))
 
 (: format-dosage (dosage -> string))
-
 (define format-dosage
   (lambda (dosage)
     (match dosage
