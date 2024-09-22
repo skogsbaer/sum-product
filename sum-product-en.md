@@ -326,7 +326,15 @@ def formatDosage(d: Dosage) -> str:
 
 ## Sums and Products in Various Languages
 
+To illustrate programming with sums and products, we've implemented
+representations for medication dosages along with the associated
+formatting function/method in various languages.
+
 ### Typescript
+
+Typescript's type system has "undiscrimated unions" via the `|`
+operator.  It's up to the programmer to include a tag in participants
+in a union to discriminate them.
 
 ```typescript
 type Medication = {
@@ -372,6 +380,11 @@ console.log(format(infliximab))
 
 ### Kotlin
 
+Kotlin offers sealed interfaces and "data classes" corresponding to
+Java's records.  Kotlin does not offer pattern matching, but its
+flow-sensitive type system allows convenient access to the attributes
+of a summand.
+
 ```kotlin
 sealed interface Dosage {
     fun format(): String =
@@ -389,7 +402,12 @@ sealed interface Dosage {
 
 ### C#
 
+FIXME
+
 ### Rust
+
+Rust - being in many way inspired by Haskell - has direct support for
+both algebraic data types and pattern matching.
 
 ```rust
 struct Medication {
@@ -414,6 +432,12 @@ fn formatMedication(m: Medication) -> String {
 ```
 
 ### Racket/Teaching Languages
+
+The Racket system has many languages.  The code here is written in the
+[DeinProgramm](https://www.deinprogr€amm.de/) [teaching
+languages](https://docs.racket-lang.org/deinprogramm/index.html).
+These have records for products, allow declaring sums as "mixed data",
+and support pattern matching:
 
 ```scheme
 #lang deinprogramm/sdp
@@ -448,6 +472,9 @@ fn formatMedication(m: Medication) -> String {
 
 ### Clojure
 
+Clojure offers records for products.  Sums do not need to be
+explicitly declared:
+
 ```clojure
 (defrecord Tablet [morning midday evening])
 (defrecord Infusion [speed duration])
@@ -463,6 +490,10 @@ fn formatMedication(m: Medication) -> String {
 
 ### Scala
 
+Scala, another strongly typed languages, has direct support for
+algebraic data types, called enumerations.  The following is Scala 3
+code:
+
 ```scala
 enum Dosage {
   case Tablet(morning: Int, midday: Int, evening: Int)
@@ -477,6 +508,10 @@ enum Dosage {
     }
 }
 ```
+
+### Swift
+
+FIXME
 
 ## Terminology
 
