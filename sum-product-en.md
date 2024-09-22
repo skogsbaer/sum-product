@@ -511,7 +511,28 @@ enum Dosage {
 
 ### Swift
 
-FIXME
+Swift, another language strongly inspired by strongly typed functional
+languages, offers algebraic data types in the form of "enums" as well
+as pattern matching:
+
+```
+enum Dosage {
+    case Tablet(Int, Int, Int)
+    case Infusion(Double, Int)
+}
+
+extension Dosage {
+    func format() -> String {
+        return switch self {
+        case let .Tablet(morning, midday, evening):
+            morning.formatted() + "-" + midday.formatted() + "-" + evening
+        case let .Infusion(speed, duration):
+            speed.formatted() + "ml/min for " + duration.formatted() + "h"
+        }
+        
+    }
+}
+```
 
 ## Terminology
 
