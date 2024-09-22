@@ -458,9 +458,8 @@ the `cond` covers all possible cases.
 
 Scala, another strongly typed languages, has direct support for
 algebraic data types, called enumerations.  The following is Scala 3
-code.
-
-FIXME: case coverage statically checked?
+code. The compiler statically checks that a `match` covers
+all possible cases.
 
 ```scala
 enum Dosage {
