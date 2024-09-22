@@ -346,7 +346,6 @@ Kotlin offers sealed interfaces and "data classes" corresponding to
 Java's records.  Kotlin does not offer pattern matching, but its
 flow-sensitive type system allows convenient access to the attributes
 of a summand.
-
 FIXME: static coverage checking?
 
 ```kotlin
@@ -519,7 +518,6 @@ extension Dosage {
         case let .Infusion(speed, duration):
             speed.formatted() + "ml/min for " + duration.formatted() + "h"
         }
-
     }
 }
 ```
