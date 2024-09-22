@@ -328,7 +328,9 @@ def formatDosage(d: Dosage) -> str:
 
 To illustrate programming with sums and products, we've implemented
 representations for medication dosages along with the associated
-formatting function/method in various languages.
+formatting function/method in various languages.  For brevity, we only
+list the functionality for dosages, omitting the surrounding
+medication record.
 
 ### Typescript
 
@@ -353,9 +355,9 @@ type Dosage = {
     duration: number
 }
 
-function format(m: Medication) {
+function formatDosage(dosage: Dosage) {
     let d: string;
-    switch (m.dosage.kind) {
+    switch (dosage.kind) {
         case "tablet":
             d = m.dosage.morning + "-" + m.dosage.midday + "-" + m.dosage.evening
             break
@@ -365,17 +367,6 @@ function format(m: Medication) {
     }
     return m.drugName + ": " + d
 }
-
-const paracetamol: Medication = {
-    drugName: "Paracetamol",
-    dosage: { kind: "tablet", morning: 1, midday: 0, evening: 2 }
-}
-const infliximab: Medication = {
-    drugName: "Infliximab",
-    dosage: { kind: "infusion", speed: 1.5, duration: 2 }
-}
-console.log(format(paracetamol))
-console.log(format(infliximab))
 ```
 
 ### Kotlin
@@ -410,24 +401,18 @@ Rust - being in many way inspired by Haskell - has direct support for
 both algebraic data types and pattern matching.
 
 ```rust
-struct Medication {
-    drug_name: String,
-    dosage: Dosage
-}
-
 enum Dosage {
     Tablet { morning: i32, midday: i32, evening: i32 },
     Infusion { speed: f32, duration: i32 }
 }
 
-fn formatMedication(m: Medication) -> String {
-    let d = match m.dosage {
+fn formatDosage(dosage: Medication) -> String {
+    match dosage {
         Dosage::Tablet { morning, midday, evening } =>
             format!("{morning}-{midday}-{evening}"),
         Dosage::Infusion { speed, duration } =>
             format!("{speed} ml/min for {duration}h")
-    };
-    format!("{0}: {d}", m.drug_name)
+    }
 }
 ```
 
@@ -455,9 +440,9 @@ and support pattern matching:
 (define dosage
   (signature (mixed tablet infusion)))
 
-(: format (dosage -> string))
+(: format-dosage (dosage -> string))
 
-(define format
+(define format-dosage
   (lambda (dosage)
     (match dosage
       ((make-tablet morning midday evening)
@@ -532,6 +517,24 @@ extension Dosage {
         
     }
 }
+```
+
+### F#
+
+F# is another strongly typed language with algebraic data types and
+pattern matching.
+
+```fsharp
+type Dosage 
+  = Tablet of int * int * int
+  | Infusion of double * double
+
+let formatDosage(dosage: Dosage): string =
+	match dosage with
+	| Tablet (morning, midday, evening) ->
+	  string morning + "-" + string midday + "-" + string evening
+	| Infusion (speed, duration) ->
+	  string speed + "ml/min for " + string duration + "h"
 ```
 
 ## Terminology
