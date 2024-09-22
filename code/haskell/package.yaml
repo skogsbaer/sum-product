@@ -25,6 +25,7 @@ ghc-options:
   - -Wmissing-home-modules
   - -Wpartial-fields
   - -Wredundant-constraints
+  - -Wno-name-shadowing
 
 executables:
   sum-product-exe:
