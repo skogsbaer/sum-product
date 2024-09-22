@@ -317,6 +317,8 @@ a problem in language design known as the [expression
 problem](https://en.wikipedia.org/wiki/Expression_problem).
 
 The formatting code in Python can also be written via pattern matching.
+The static type checker [pyright](https://github.com/microsoft/pyright)
+checks statically that the `match` covers all possible cases.
 
 ```python
 def format(m: Medication) -> str:
@@ -344,6 +346,8 @@ Kotlin offers sealed interfaces and "data classes" corresponding to
 Java's records.  Kotlin does not offer pattern matching, but its
 flow-sensitive type system allows convenient access to the attributes
 of a summand.
+
+TOD: static coverage checking?
 
 ```kotlin
 sealed interface Dosage {
@@ -406,7 +410,8 @@ The Racket system has many languages.  The code here is written in the
 [DeinProgramm](https://www.deinprogr€amm.de/) [teaching
 languages](https://docs.racket-lang.org/deinprogramm/index.html).
 These have records for products, allow declaring sums as "mixed data",
-and support pattern matching:
+and support pattern matching. There is no static checking that
+the `match` covers all possible cases.
 
 ```scheme
 #lang deinprogramm/sdp
@@ -442,7 +447,8 @@ and support pattern matching:
 ### Clojure
 
 Clojure offers records for products.  Sums do not need to be
-explicitly declared:
+explicitly declared. There is no static checking that
+the `cond` covers all possible cases.
 
 ```clojure
 (defrecord Tablet [morning midday evening])
@@ -452,16 +458,18 @@ explicitly declared:
   [dosage]
   (cond
     (instance? Tablet dosage)
-    (str (:morning dosage) "-" (:midday dosage) "-" (:evening dosage))
+      (str (:morning dosage) "-" (:midday dosage) "-" (:evening dosage))
     (instance? Infusion dosage)
-    (str (:speed dosage) "ml/min for " (:duration dosage) "h")))
+      (str (:speed dosage) "ml/min for " (:duration dosage) "h")))
 ```
 
 ### Scala
 
 Scala, another strongly typed languages, has direct support for
 algebraic data types, called enumerations.  The following is Scala 3
-code:
+code.
+
+FIXME: case coverage statically checked?
 
 ```scala
 enum Dosage {
@@ -481,10 +489,11 @@ enum Dosage {
 ### F#
 
 F# is another strongly typed language with algebraic data types and
-pattern matching.
+pattern matching. The compiler statically checks that a `match`
+covers all possible cases.
 
 ```fsharp
-type Dosage 
+type Dosage
   = Tablet of int * int * int
   | Infusion of double * double
 
@@ -502,6 +511,8 @@ Swift, another language strongly inspired by strongly typed functional
 languages, offers algebraic data types in the form of "enums" as well
 as pattern matching:
 
+FIXME: case coverage statically checked?
+
 ```swift
 enum Dosage {
     case Tablet(Int, Int, Int)
@@ -516,7 +527,7 @@ extension Dosage {
         case let .Infusion(speed, duration):
             speed.formatted() + "ml/min for " + duration.formatted() + "h"
         }
-        
+
     }
 }
 ```
@@ -524,7 +535,8 @@ extension Dosage {
 ### Rust
 
 Rust - being in many way inspired by Haskell - has direct support for
-both algebraic data types and pattern matching.
+both algebraic data types and pattern matching. The compiler
+statically checks that `match` covers all possible cases.
 
 ```rust
 enum Dosage {
@@ -545,8 +557,9 @@ fn formatDosage(dosage: Medication) -> String {
 ### Typescript
 
 Typescript's type system has "undiscrimated unions" via the `|`
-operator.  It's up to the programmer to include a tag in participants
-in a union to discriminate them.
+operator.  It's up to the programmer to include a tag in the participants
+of a union to discriminate them. In the following example,
+the compiler can check that the `switch` covers all possible cases.
 
 ```typescript
 type Dosage = {
@@ -634,7 +647,4 @@ online.
 Sums and products are also covered in the iSAQB Advanced curriculi on
 [Functional Architecture (FUNAR)](https://www.isaqb.org/certifications/cpsa-certifications/cpsa-advanced-level/funar-functional-software-architecture/) and [Domain-Specific Languages (DSL)](https://www.isaqb.org/certifications/cpsa-certifications/cpsa-advanced-level/dsl/).
 
-TODO:
-
-* Discussion of advantages/disadvantages
 
