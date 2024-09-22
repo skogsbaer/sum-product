@@ -310,6 +310,11 @@ languages felt that the tradeoffs of the functional way are worth
 considering.  This is particularly the case with *combinator models*,
 a subject for another post.
 
+Of course, it would be nice if both adding more cases and more
+functions would equally adhere to the open/closed principle.  This is
+a problem in language design known as the [expression
+problem](https://en.wikipedia.org/wiki/Expression_problem).
+
 The formatting code in Python can also be written via pattern matching.
 
 ```python
@@ -595,5 +600,4 @@ Sums and products are also covered in the iSAQB Advanced curriculi on
 TODO:
 
 * Discussion of advantages/disadvantages
-* mention expression problem
 
