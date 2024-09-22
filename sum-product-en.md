@@ -362,7 +362,43 @@ sealed interface Dosage {
 
 ### C#
 
-FIXME
+In C#, we use records to encode products. For sums, we have
+to resort to inheritance.
+
+```csharp
+public record Dosage {
+    public record Tablet(int morning, int midday, int evening) : Dosage();
+    public record Infusion(double speed, int duration) : Dosage();
+
+    public string format() {
+        return this switch {
+            Tablet t => t.morning + "-" + t.midday + "-" + t.evening,
+            Infusion i => i.speed + "ml/min for " + i.duration + "h",
+            _ => throw new ApplicationException("unexpected dosage: " + this)
+        };
+    }
+
+    // private constructor can prevent derived cases from being defined elsewhere
+    private Dosage() {}
+}
+
+public record Medication(string drugName, Dosage dosage) {
+
+    public string format() {
+        return this.drugName + ": " + this.dosage.format();
+    }
+}
+```
+
+The compiler cannot check that
+`Tablet` und `Infusion` are the only possible subtypes
+of `Dosage`, so the
+`switch` statement in `format` requires a default case `_`.
+The
+[official proposal](https://github.com/dotnet/csharplang/blob/18a527bcc1f0bdaf542d8b9a189c50068615b439/proposals/TypeUnions.md)
+for
+adding union types to C# would allow us to omit the default
+case.
 
 ### Racket/Teaching Languages
 
