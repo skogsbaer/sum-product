@@ -202,7 +202,7 @@ but `morning` is null, and `speed` is 5?  Everyone who has been around
 real-world SQL databases has seen rows like that, and the ensuing
 messiness and architecture problems.
 
-Of course, tables in a relational databases are just an external
+Of course, tables in a relational database are just an external
 representation of the data, and an application is free to convert
 between a "proper" data model in the software itself and its
 relational encoding.  And it well should, be it via explicit code or
@@ -302,8 +302,8 @@ The familiar [Open/Closed Principle](https://public.isaqb.org/glossary/glossary-
 states that software - in the face of new requirements - should
 ideally only require extension, not modification.
 Code written in what we called the functional way (or with the visitor pattern)
-enables openess for new operations, whereas the object-oriented
-way enables openess for new alternatives.
+enables openness for new operations, whereas the object-oriented
+way enables openness for new alternatives.
 
 The designers of functional languages and those who recently brought
 record/data classes and pattern matching into object-oriented
@@ -347,7 +347,7 @@ Java's records.  Kotlin does not offer pattern matching, but its
 flow-sensitive type system allows convenient access to the attributes
 of a summand.
 
-TOD: static coverage checking?
+FIXME: static coverage checking?
 
 ```kotlin
 sealed interface Dosage {
@@ -388,7 +388,7 @@ public record Dosage {
 ```
 
 The compiler cannot check that
-`Tablet` und `Infusion` are the only possible subtypes
+`Tablet` and `Infusion` are the only possible subtypes
 of `Dosage`, so the
 `switch` statement in `format` requires a default case `_`.
 The
@@ -526,7 +526,7 @@ extension Dosage {
 
 ### Rust
 
-Rust - being in many way inspired by Haskell - has direct support for
+Rust - being in many ways inspired by Haskell - has direct support for
 both algebraic data types and pattern matching. The compiler
 statically checks that `match` covers all possible cases.
 
@@ -548,7 +548,7 @@ fn formatDosage(dosage: Medication) -> String {
 
 ### Typescript
 
-Typescript's type system has "undiscrimated unions" via the `|`
+Typescript's type system has "undiscriminated unions" via the `|`
 operator.  It's up to the programmer to include a tag in the participants
 of a union to discriminate them. In the following example,
 the compiler can check that the `switch` covers all possible cases.
@@ -617,7 +617,7 @@ set-theoretic perspective: products are basically [cartesian
 products](https://en.wikipedia.org/wiki/Cartesian_product) containing
 *tuples* (offered directly by many functional languages) and sums are
 set *unions*.  As the programming-language constructs for sums in
-Haskell or Java ensure that the particiants in a sum are
+Haskell or Java ensure that the participants in a sum are
 distinguishable from each other, they are also called *disjoint* or
 *discriminated unions*.
 
