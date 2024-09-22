@@ -1,0 +1,9 @@
+{
+  "name": "medication",
+  "version": "1.0.0",
+  "description": "",
+  "main": "medication.js",
+  "devDependencies": {
+    "typescript": "^5.6.0"
+  }
+}
