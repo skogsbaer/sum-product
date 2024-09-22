@@ -33,9 +33,8 @@ This article explains the simple concept of sums and products.
 Further, it shows how to encode a simplified
 real-world scenario using sums
 and products in modern programming languages
-(Java, Python, Typescript, Kotlin, C#, Haskell, Rust, Racket, Swift,
-and F#.)
-
+(Java, Python, Haskell, Kotlin, C#, Racket, Clojure, Scala, F#, Swift, Rust,
+Typescript).
 
 ## Scenario
 
@@ -346,7 +345,8 @@ Kotlin offers sealed interfaces and "data classes" corresponding to
 Java's records.  Kotlin does not offer pattern matching, but its
 flow-sensitive type system allows convenient access to the attributes
 of a summand.
-FIXME: static coverage checking?
+The compiler statically checks that a `when` covers
+all possible cases.
 
 ```kotlin
 sealed interface Dosage {
