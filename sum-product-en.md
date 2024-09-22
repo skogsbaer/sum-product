@@ -381,11 +381,9 @@ sealed interface Dosage {
             is Infusion ->
                 speed.toString() + "ml/min for " + duration + "h"
         }
-    data class Tablet(val morning: Int, val midday: Int, val evening: Int)
-	  : Dosage {}
+    data class Tablet(val morning: Int, val midday: Int, val evening: Int) : Dosage {}
 
-    data class Infusion(val speed: Double, val duration: Int)
-	  : Dosage {}
+    data class Infusion(val speed: Double, val duration: Int) : Dosage {}
 }
 ```
 
@@ -417,7 +415,7 @@ fn formatMedication(m: Medication) -> String {
 
 ### Racket/Teaching Languages
 
-```racket
+```scheme
 #lang deinprogramm/sdp
 (define-record tablet
   make-tablet
