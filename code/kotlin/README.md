@@ -1,6 +1,6 @@
 Medication example in Kotlin
 
-Requirements: kotlin
+Requirements: commands kotlin and kotlinc
 
 Compiling/running
 

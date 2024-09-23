@@ -1,4 +1,4 @@
-# Data Modeling, Sums and Products
+# Data Modeling with Sums and Products
 
 Data Modeling is often an underappreciated aspect of software architecture,
 yet it plays a crucial role in achieving not only functional but also
