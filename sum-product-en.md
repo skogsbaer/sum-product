@@ -499,9 +499,8 @@ let formatDosage(dosage: Dosage): string =
 
 Swift, another language strongly inspired by strongly typed functional
 languages, offers algebraic data types in the form of "enums" as well
-as pattern matching:
-
-FIXME: case coverage statically checked?
+as pattern matching.  The compiler statically checks that a `switch`
+covers all possible cases.
 
 ```swift
 enum Dosage {
@@ -513,7 +512,7 @@ extension Dosage {
     func format() -> String {
         return switch self {
         case let .Tablet(morning, midday, evening):
-            morning.formatted() + "-" + midday.formatted() + "-" + evening
+            morning.formatted() + "-" + midday.formatted() + "-" + evening.formatted()
         case let .Infusion(speed, duration):
             speed.formatted() + "ml/min for " + duration.formatted() + "h"
         }
