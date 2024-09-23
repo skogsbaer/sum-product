@@ -1,6 +1,6 @@
 # Data Modeling, Sums and Products
 
-Date Modeling is often an underappreciated aspect of software architecture,
+Data Modeling is often an underappreciated aspect of software architecture,
 yet it plays a crucial role in achieving not only functional but also
 usability and maintainability goals. Poor
 data models and poorly integrated data models can greatly
@@ -33,9 +33,8 @@ This article explains the simple concept of sums and products.
 Further, it shows how to encode a simplified
 real-world scenario using sums
 and products in modern programming languages
-(Java, Python, Typescript, Kotlin, C#, Haskell, Rust, Racket, Swift,
-and F#.)
-
+(Java, Python, Haskell, Kotlin, C#, Racket, Clojure, Scala, F#, Swift, Rust,
+Typescript).
 
 ## Scenario
 
@@ -79,12 +78,12 @@ medication and the two different dosages uses "consists of" and the
 word "and", whereas the description of dosage uses "or".  Different
 wordings are possible (e.g. "has attributes" for the former and "is one of
 the following" for the latter), but the wordings always describe the two sorts of
-data that are fundamentally different - on is "and data", the other is "or
+data that are fundamentally different - one is "and data", the other is "or
 data".  As stated above, these two concepts go by different names, but
 the most common ones are *products* (for "and data") and *sums* (for
 "or data").
 
-* A **products** has several, fixed attributes.
+* A **product** has several, fixed attributes.
 * A **sum** has several, distinct alternatives.
 
 ## Products, Sums, and Code
@@ -159,7 +158,7 @@ data Medication = Medication { drugName :: String, dosage :: Dosage }
 `Dosage` is the sum of the products `TableDosage` (with attributes
 `morning`, `midday`, and `evening`) and `InfusionDosage` (with
 attributes `speed` and `duration`).
-`Medication` can be seens as a sum with only one alternative,
+`Medication` can be seen as a sum with only one alternative,
 namely the product `Medication` (with attributes `drugName` and
 `dosage`).
 
@@ -195,14 +194,14 @@ dosage, and we'd expect `morning`, `midday`, and `evening` to be
 non-null integers.  Presumably, `speed` and
 `duration` *should* be null.  Conversely for the other case.
 
-This is an quite indirect *encoding* of a sum as a product, with the help of nullable
-types. This encoding
+This is a quite indirect *encoding* of a sum as a product,
+with the help of nullable types. This encoding
 poses significant risks of being misused: What if `dosageKind` is 1,
 but `morning` is null, and `speed` is 5?  Everyone who has been around
 real-world SQL databases has seen rows like that, and the ensuing
 messiness and architecture problems.
 
-Of course, tables in a relational databases are just an external
+Of course, tables in a relational database are just an external
 representation of the data, and an application is free to convert
 between a "proper" data model in the software itself and its
 relational encoding.  And it well should, be it via explicit code or
@@ -222,7 +221,7 @@ would typically use explicit tags to encode sums:
 ```
 
 Again, this example emphasizes the need to separate between the *data model* in
-the software and *encodings* in a databases or serialization formats,
+the software and *encodings* in a database or serialization formats,
 and use an anti-corruption layer between them as necessary.
 
 ## Sums and Products and the Open/Closed Principle
@@ -298,12 +297,12 @@ without touching the existing code. But adding new operations is painful
 because it requires a new method in the `Dosage` interface, with changes
 to all classes implementing it.
 
-The familar [Open/Closed Principle](https://public.isaqb.org/glossary/glossary-en.html#term-open-close-principle)
+The familiar [Open/Closed Principle](https://public.isaqb.org/glossary/glossary-en.html#term-open-close-principle)
 states that software - in the face of new requirements - should
 ideally only require extension, not modification.
 Code written in what we called the functional way (or with the visitor pattern)
-enables openess for new operations, whereas the object-oriented
-way enables openess for new alternatives.
+enables openness for new operations, whereas the object-oriented
+way enables openness for new alternatives.
 
 The designers of functional languages and those who recently brought
 record/data classes and pattern matching into object-oriented
@@ -317,6 +316,8 @@ a problem in language design known as the [expression
 problem](https://en.wikipedia.org/wiki/Expression_problem).
 
 The formatting code in Python can also be written via pattern matching.
+The static type checker [pyright](https://github.com/microsoft/pyright)
+checks statically that the `match` covers all possible cases.
 
 ```python
 def format(m: Medication) -> str:
@@ -334,9 +335,9 @@ def formatDosage(d: Dosage) -> str:
 
 To illustrate programming with sums and products, we've implemented
 representations for medication dosages along with the associated
-formatting function/method in various languages.  For brevity, we only
-list the functionality for dosages, omitting the surrounding
-medication record.
+formatting function/method in various languages.  For brevity, we
+list only the functionality for dosages, omitting the surrounding
+medication record. The [full code](https://github.com/skogsbaer/sum-product/tree/main/code) is available.
 
 ### Kotlin
 
@@ -344,6 +345,8 @@ Kotlin offers sealed interfaces and "data classes" corresponding to
 Java's records.  Kotlin does not offer pattern matching, but its
 flow-sensitive type system allows convenient access to the attributes
 of a summand.
+The compiler statically checks that a `when` covers
+all possible cases.
 
 ```kotlin
 sealed interface Dosage {
@@ -362,7 +365,36 @@ sealed interface Dosage {
 
 ### C#
 
-FIXME
+In C#, we use records to encode products. For sums, we have
+to resort to inheritance.
+
+```csharp
+public record Dosage {
+    public record Tablet(int morning, int midday, int evening) : Dosage();
+    public record Infusion(double speed, int duration) : Dosage();
+
+    public string format() {
+        return this switch {
+            Tablet t => t.morning + "-" + t.midday + "-" + t.evening,
+            Infusion i => i.speed + "ml/min for " + i.duration + "h",
+            _ => throw new ApplicationException("unexpected dosage: " + this)
+        };
+    }
+
+    // private constructor can prevent derived cases from being defined elsewhere
+    private Dosage() {}
+}
+```
+
+The compiler cannot check that
+`Tablet` and `Infusion` are the only possible subtypes
+of `Dosage`, so the
+`switch` statement in `format` requires a default case `_`.
+The
+[official proposal](https://github.com/dotnet/csharplang/blob/18a527bcc1f0bdaf542d8b9a189c50068615b439/proposals/TypeUnions.md)
+for
+adding union types to C# would allow us to omit the default
+case.
 
 ### Racket/Teaching Languages
 
@@ -370,7 +402,8 @@ The Racket system has many languages.  The code here is written in the
 [DeinProgramm](https://www.deinprogr€amm.de/) [teaching
 languages](https://docs.racket-lang.org/deinprogramm/index.html).
 These have records for products, allow declaring sums as "mixed data",
-and support pattern matching:
+and support pattern matching. There is no static checking that
+the `match` covers all possible cases.
 
 ```scheme
 #lang deinprogramm/sdp
@@ -389,7 +422,6 @@ and support pattern matching:
   (signature (mixed tablet infusion)))
 
 (: format-dosage (dosage -> string))
-
 (define format-dosage
   (lambda (dosage)
     (match dosage
@@ -406,7 +438,8 @@ and support pattern matching:
 ### Clojure
 
 Clojure offers records for products.  Sums do not need to be
-explicitly declared:
+explicitly declared. There is no static checking that
+the `cond` covers all possible cases.
 
 ```clojure
 (defrecord Tablet [morning midday evening])
@@ -416,16 +449,17 @@ explicitly declared:
   [dosage]
   (cond
     (instance? Tablet dosage)
-    (str (:morning dosage) "-" (:midday dosage) "-" (:evening dosage))
+      (str (:morning dosage) "-" (:midday dosage) "-" (:evening dosage))
     (instance? Infusion dosage)
-    (str (:speed dosage) "ml/min for " (:duration dosage) "h")))
+      (str (:speed dosage) "ml/min for " (:duration dosage) "h")))
 ```
 
 ### Scala
 
 Scala, another strongly typed languages, has direct support for
 algebraic data types, called enumerations.  The following is Scala 3
-code:
+code. The compiler statically checks that a `match` covers
+all possible cases.
 
 ```scala
 enum Dosage {
@@ -445,10 +479,11 @@ enum Dosage {
 ### F#
 
 F# is another strongly typed language with algebraic data types and
-pattern matching.
+pattern matching. The compiler statically checks that a `match`
+covers all possible cases.
 
 ```fsharp
-type Dosage 
+type Dosage
   = Tablet of int * int * int
   | Infusion of double * double
 
@@ -466,6 +501,8 @@ Swift, another language strongly inspired by strongly typed functional
 languages, offers algebraic data types in the form of "enums" as well
 as pattern matching:
 
+FIXME: case coverage statically checked?
+
 ```swift
 enum Dosage {
     case Tablet(Int, Int, Int)
@@ -480,15 +517,15 @@ extension Dosage {
         case let .Infusion(speed, duration):
             speed.formatted() + "ml/min for " + duration.formatted() + "h"
         }
-        
     }
 }
 ```
 
 ### Rust
 
-Rust - being in many way inspired by Haskell - has direct support for
-both algebraic data types and pattern matching.
+Rust - being in many ways inspired by Haskell - has direct support for
+both algebraic data types and pattern matching. The compiler
+statically checks that `match` covers all possible cases.
 
 ```rust
 enum Dosage {
@@ -508,9 +545,10 @@ fn formatDosage(dosage: Medication) -> String {
 
 ### Typescript
 
-Typescript's type system has "undiscrimated unions" via the `|`
-operator.  It's up to the programmer to include a tag in participants
-in a union to discriminate them.
+Typescript's type system has "undiscriminated unions" via the `|`
+operator.  It's up to the programmer to include a tag in the participants
+of a union to discriminate them. In the following example,
+the compiler can check that the `switch` covers all possible cases.
 
 ```typescript
 type Dosage = {
@@ -576,7 +614,7 @@ set-theoretic perspective: products are basically [cartesian
 products](https://en.wikipedia.org/wiki/Cartesian_product) containing
 *tuples* (offered directly by many functional languages) and sums are
 set *unions*.  As the programming-language constructs for sums in
-Haskell or Java ensure that the particiants in a sum are
+Haskell or Java ensure that the participants in a sum are
 distinguishable from each other, they are also called *disjoint* or
 *discriminated unions*.
 
@@ -598,7 +636,4 @@ online.
 Sums and products are also covered in the iSAQB Advanced curriculi on
 [Functional Architecture (FUNAR)](https://www.isaqb.org/certifications/cpsa-certifications/cpsa-advanced-level/funar-functional-software-architecture/) and [Domain-Specific Languages (DSL)](https://www.isaqb.org/certifications/cpsa-certifications/cpsa-advanced-level/dsl/).
 
-TODO:
-
-* Discussion of advantages/disadvantages
 

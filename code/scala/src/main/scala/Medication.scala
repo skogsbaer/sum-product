@@ -11,3 +11,7 @@ enum Dosage {
     }
 }
 
+case class Medication(drugName: String, dosage: Dosage) {
+  def format =
+    this.drugName + this.dosage.format
+}
