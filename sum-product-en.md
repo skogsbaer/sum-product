@@ -1,5 +1,7 @@
 # Data Modeling with Sums and Products
 
+*Authors: Mike Sperber and Stefan Wehr*
+
 Data Modeling is often an underappreciated aspect of software architecture,
 yet it plays a crucial role in achieving not only functional but also
 usability and maintainability goals. Poor
