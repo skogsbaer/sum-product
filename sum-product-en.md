@@ -578,7 +578,7 @@ function formatDosage(dosage: Dosage) {
 ## Terminology
 
 Why are these constructs called sums and products?  One simple
-argument is about the number of values a sum or product type has.
+illustration uses the number of values a sum or product type has.
 Consider the following Java enumerations:
 
 ```java
@@ -606,7 +606,8 @@ record RT2(T2 t2) implements S {}
 record RT3(T3 t3) implements S {}
 ```
 
-This has 2+3=5 values.
+This has 2+3=5 values.  So sums do correspond to sums of numbers and
+products to products of numbers.
 
 Another way to look at these two constructs would be from a
 set-theoretic perspective: products are basically [cartesian
