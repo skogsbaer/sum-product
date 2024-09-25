@@ -39,7 +39,9 @@ Typescript).
 ## Scenario
 
 Our scenario is based on long-standing experience with a
-large, commercial software system that implements a health information
+large, commercial
+[software system](https://functional-architecture.org/events/funarch-2023/#a-software-architecture-based-on-coarse-grained-self-adjusting-computations)
+ that implements a health information
 system to be used by hospitals. Clearly, we have greatly simplified
 the scenario and omitted many details.
 
