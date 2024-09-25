@@ -532,7 +532,7 @@ enum Dosage {
     Infusion { speed: f32, duration: i32 }
 }
 
-fn formatDosage(dosage: Medication) -> String {
+fn formatDosage(dosage: Dosage) -> String {
     match dosage {
         Dosage::Tablet { morning, midday, evening } =>
             format!("{morning}-{midday}-{evening}"),
