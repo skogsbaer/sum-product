@@ -458,7 +458,7 @@ the `cond` covers all possible cases.
 
 ### Scala
 
-Scala, another strongly typed languages, has direct support for
+Scala, a strongly typed languages, has direct support for
 algebraic data types, called enumerations.  The following is Scala 3
 code. The compiler statically checks that a `match` covers
 all possible cases.
@@ -499,8 +499,8 @@ let formatDosage(dosage: Dosage): string =
 
 ### Swift
 
-Swift, another language strongly inspired by strongly typed functional
-languages, offers algebraic data types in the form of "enums" as well
+Swift was inspired by strongly typed functional
+languages. It offers algebraic data types in the form of "enums" as well
 as pattern matching.  The compiler statically checks that a `switch`
 covers all possible cases.
 
