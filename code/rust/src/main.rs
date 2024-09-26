@@ -8,14 +8,17 @@ enum Dosage {
     Infusion { speed: f32, duration: i32 }
 }
 
-fn formatMedication(m: Medication) -> String {
-    let d = match m.dosage {
+fn format_dosage(dosage: Dosage) -> String {
+    match dosage {
         Dosage::Tablet { morning, midday, evening } =>
             format!("{morning}-{midday}-{evening}"),
         Dosage::Infusion { speed, duration } =>
             format!("{speed} ml/min for {duration}h")
-    };
-    format!("{0}: {d}", m.drug_name)
+    }
+}
+
+fn format_medication(m: Medication) -> String {
+    format!("{0}: {1}", m.drug_name, format_dosage(m.dosage))
 }
 
 fn main() {
@@ -27,6 +30,6 @@ fn main() {
         drug_name: "Infliximab".into(),
         dosage: Dosage::Infusion { speed: 1.5, duration: 2 }
     };
-    println!("{}", formatMedication(paracetamol));
-    println!("{}", formatMedication(infliximab))
+    println!("{}", format_medication(paracetamol));
+    println!("{}", format_medication(infliximab))
 }

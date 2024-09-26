@@ -536,7 +536,7 @@ enum Dosage {
     Infusion { speed: f32, duration: i32 }
 }
 
-fn formatDosage(dosage: Dosage) -> String {
+fn format_dosage(dosage: Dosage) -> String {
     match dosage {
         Dosage::Tablet { morning, midday, evening } =>
             format!("{morning}-{midday}-{evening}"),
@@ -612,7 +612,7 @@ record RT2(T2 t2) implements S {}
 record RT3(T3 t3) implements S {}
 ```
 
-This has 2+3=5 values.  So sums do correspond to sums of numbers and
+This has 2+3=5 values.  So sums correspond to sums of numbers and
 products to products of numbers.
 
 Another way to look at these two constructs would be from a
