@@ -41,7 +41,9 @@ Typescript).
 ## Scenario
 
 Our scenario is based on long-standing experience with a
-large, commercial software system that implements a health information
+large, commercial
+[software system](https://functional-architecture.org/events/funarch-2023/#a-software-architecture-based-on-coarse-grained-self-adjusting-computations)
+ that implements a health information
 system to be used by hospitals. Clearly, we have greatly simplified
 the scenario and omitted many details.
 
@@ -458,7 +460,7 @@ the `cond` covers all possible cases.
 
 ### Scala
 
-Scala, another strongly typed languages, has direct support for
+Scala, a strongly typed languages, has direct support for
 algebraic data types, called enumerations.  The following is Scala 3
 code. The compiler statically checks that a `match` covers
 all possible cases.
@@ -499,8 +501,8 @@ let formatDosage(dosage: Dosage): string =
 
 ### Swift
 
-Swift, another language strongly inspired by strongly typed functional
-languages, offers algebraic data types in the form of "enums" as well
+Swift was inspired by strongly typed functional
+languages. It offers algebraic data types in the form of "enums" as well
 as pattern matching.  The compiler statically checks that a `switch`
 covers all possible cases.
 
@@ -534,7 +536,7 @@ enum Dosage {
     Infusion { speed: f32, duration: i32 }
 }
 
-fn formatDosage(dosage: Medication) -> String {
+fn formatDosage(dosage: Dosage) -> String {
     match dosage {
         Dosage::Tablet { morning, midday, evening } =>
             format!("{morning}-{midday}-{evening}"),
@@ -580,7 +582,7 @@ function formatDosage(dosage: Dosage) {
 ## Terminology
 
 Why are these constructs called sums and products?  One simple
-argument is about the number of values a sum or product type has.
+illustration uses the number of values a sum or product type has.
 Consider the following Java enumerations:
 
 ```java
@@ -591,6 +593,8 @@ enum T3 {
     X, Y, Z
 }
 ```
+
+(Of course, a Java `enum` is also a limited form of sum type.)
 
 `T2` has two values and `T3` has three. Here's a product of these two
 types:
@@ -608,7 +612,8 @@ record RT2(T2 t2) implements S {}
 record RT3(T3 t3) implements S {}
 ```
 
-This has 2+3=5 values.
+This has 2+3=5 values.  So sums do correspond to sums of numbers and
+products to products of numbers.
 
 Another way to look at these two constructs would be from a
 set-theoretic perspective: products are basically [cartesian
