@@ -592,6 +592,8 @@ enum T3 {
 }
 ```
 
+(Of course, a Java `enum` is also a limited form of sum type.)
+
 `T2` has two values and `T3` has three. Here's a product of these two
 types:
 
