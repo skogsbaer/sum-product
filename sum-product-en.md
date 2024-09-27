@@ -26,9 +26,9 @@ or *and data*, and sums are known as *discriminated union*,
 Sums and products have their roots in algebraic data types, which
 are well known from functional programming languages like Haskell
 or OCaml. However, the underlying concept is
-independent from a particular programming languages. In many
+independent from a particular programming language. In many
 years of experience in software architecture and development,
-we have used this concept as a valuable tool for all kind of
+we have used this concept as a valuable tool for all kinds of
 data modeling tasks, in various programming languages and contexts.
 
 This article explains the simple concept of sums and products.
@@ -90,7 +90,7 @@ the most common ones are *products* (for "and data") and *sums* (for
 * A **product** has several, fixed attributes.
 * A **sum** has several, distinct alternatives.
 
-## Products, Sums, and Code
+## Code for Sum and Products
 
 Here is a translation of the data descriptions into Java code:
 
@@ -103,8 +103,8 @@ public sealed interface Dosage {
 }
 ```
 
-Java supports products through [record classes](https://openjdk.org/jeps/395) with
-attributes, and sums through the combination of
+Java supports products through [record classes](https://openjdk.org/jeps/395),
+and sums through the combination of
 [sealed interfaces](https://openjdk.org/jeps/409) and classes
 implementing them.  (You might have noticed that this code is not
 "classic Java" and uses fairly recent features - we'll get to that.)
@@ -460,7 +460,7 @@ the `cond` covers all possible cases.
 
 ### Scala
 
-Scala, a strongly typed languages, has direct support for
+Scala, a strongly typed language, has direct support for
 algebraic data types, called enumerations.  The following is Scala 3
 code. The compiler statically checks that a `match` covers
 all possible cases.
@@ -550,7 +550,7 @@ fn format_dosage(dosage: Dosage) -> String {
 
 Typescript's type system has "undiscriminated unions" via the `|`
 operator.  It's up to the programmer to include a tag in the participants
-of a union to discriminate them. In the following example,
+of a union to distinguish them. In the following example,
 the compiler can check that the `switch` covers all possible cases.
 
 ```typescript
@@ -617,9 +617,8 @@ products to products of numbers.
 
 Another way to look at these two constructs would be from a
 set-theoretic perspective: products are basically [cartesian
-products](https://en.wikipedia.org/wiki/Cartesian_product) containing
-*tuples* (offered directly by many functional languages) and sums are
-set *unions*.  As the programming-language constructs for sums in
+products](https://en.wikipedia.org/wiki/Cartesian_product) and sums are
+set unions.  As the programming-language constructs for sums in
 Haskell or Java ensure that the participants in a sum are
 distinguishable from each other, they are also called *disjoint* or
 *discriminated unions*.
